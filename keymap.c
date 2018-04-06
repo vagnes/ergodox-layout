@@ -1,3 +1,5 @@
+// ergodox ez layout by vagn.es
+
 #include QMK_KEYBOARD_H
 #include "debug.h"
 #include "action_layer.h"
@@ -9,53 +11,53 @@
 
 
 enum custom_keycodes {
-	PLACEHOLDER = SAFE_RANGE, // can always be here
+	GGWP = SAFE_RANGE,
 	RGB_SLD
-};
+};		
+
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /* Keymap 0: Basic layer
  *
  * ,--------------------------------------------------.           ,--------------------------------------------------.
- * | PrtSc  |   1  |   2  |   3  |   4  |   5  | LEFT |           | TG(3)|   6  |   7  |   8  |   9  |   0  |   \    |
+ * | PrtSc  |   1  |   2  |   3  |   4  |   5  | GGWP |           | TG(3)|   6  |   7  |   8  |   9  |   0  |   \    |
  * |--------+------+------+------+------+-------------|           |------+------+------+------+------+------+--------|
- * |   =    |   '  |   ,  |   .  |   P  |   Y  | Home |           | PgUp |   F  |   G  |   C  |   R  |   L  |   /    |
+ * |  =/+   | '/"  |   ,  |   .  |   P  |   Y  | Home |           | PgUp |   F  |   G  |   C  |   R  |   L  |   /    |
  * |--------+------+------+------+------+------|      |           |      |------+------+------+------+------+--------|
- * |  ;/:   |   A  |   O  |   E  |   U  |   I  |------|           |------|   D  | H/L2 |   T  |   N  |   S  |   -    |
+ * |  ;/:   |   A  | O/L1 |   E  |   U  |   I  |------|           |------|   D  | H/L2 |   T  | N/L1 |   S  |   -    |
  * |--------+------+------+------+------+------| End  |           | PgDn |------+------+------+------+------+--------|
- * | LShift | Ctrl |   Q  |   J  |   K  |   X  |      |           |      |   B  |   M  |   W  |   V  |Z/Ctrl| RShift |
+ * | LSh/CL | Ctrl |   Q  |   J  |   K  |   X  |      |           |      |   B  |   M  |   W  |   V  |Z/Ctrl| RShift |
  * `--------+------+------+------+------+-------------'           `-------------+------+------+------+------+--------'
  *   |Grv/L1|  '"  |AltShf| Left | Right|                                       |  Up  | Down |   [  |   ]  | ~L1  |
  *   `----------------------------------'                                       `----------------------------------'
  *                                        ,-------------.       ,---------------.
- *                                        | App  | LGui |       | Alt  |  Esc   |
+ *                                        | App  | CAPS |       | Alt  |  Esc   |
  *                                 ,------|------|------|       |------+--------+------.
- *                                 |      |      | Del  |       | CPY  |        |      |
+ *                                 |      |      | Del  |       | Ins  |        |      |
  *                                 | Space|Backsp|------|       |------|  Tab   |Enter |
- *                                 |      |ace   |LShift|       | PST  |        |      |
+ *                                 |      |ace   | LGui |       | RGui |        |      |
  *                                 `--------------------'       `----------------------'
  */
-// If it accepts an argument (i.e, is a function), it doesn't need KC_.
-// Otherwise, it needs KC_*
+
 [BASE] = LAYOUT_ergodox(  // layer 0 : default
 				// left hand
-				KC_PSCR,        KC_1,           KC_2,    KC_3,   KC_4,   KC_5,   KC_LEFT,
+				KC_PSCR,        KC_1,           KC_2,    KC_3,   KC_4,   KC_5,   GGWP,
 				KC_EQL,         KC_QUOT,        KC_COMM, KC_DOT, KC_P,   KC_Y,   KC_HOME,
-				KC_SCLN,        KC_A,           KC_O,    KC_E,   KC_U,   KC_I,
-				KC_LSFT,        KC_LCTL,        KC_Q,    KC_J,   KC_K,   KC_X,   KC_END,
+				KC_SCLN,        KC_A,           LT(SYMB, KC_O),    KC_E,   KC_U,   KC_I,
+				KC_LSHIFT,      KC_LCTL,        KC_Q,    KC_J,   KC_K,   KC_X,   KC_END,
 				LT(SYMB,KC_GRV),KC_QUOT,      LALT(KC_LSFT), KC_LEFT, KC_RGHT,
-																							ALT_T(KC_APP),  KC_LGUI,
-																															KC_DELT,
-																							KC_SPC, KC_BSPC,KC_LSFT,
+																							ALT_T(KC_APP),  KC_CAPS,
+																											KC_DELT,
+																							KC_SPC, KC_BSPC,KC_LGUI,
 				// right hand
 				TG(3),       KC_6,   KC_7,   KC_8,   KC_9,   KC_0,         KC_BSLS,
 				KC_PGUP,     KC_F,   KC_G,   KC_C,   KC_R,   KC_L,         KC_SLSH,
-										 KC_D,   LT(MDIA, KC_H), KC_T,   KC_N,   KC_S, KC_MINS,
+							 KC_D,   LT(MDIA, KC_H), KC_T,   LT(SYMB, KC_N),   KC_S, KC_MINS,
 				KC_PGDN,     KC_B,   KC_M,   KC_W,   KC_V,   CTL_T(KC_Z),  KC_RSFT,
-														KC_UP,  KC_DOWN,KC_LBRC,KC_RBRC,       KC_FN1,
+									 KC_UP,  KC_DOWN,KC_LBRC,KC_RBRC,      KC_FN1,
 				KC_LALT, KC_ESC,
-				KC_COPY,
-				KC_PASTE, KC_TAB, KC_ENT
+				KC_INS,
+				KC_RGUI, KC_TAB, KC_ENT
 		),
 /* Keymap 1: Symbol Layer
  *
@@ -86,9 +88,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 			 KC_TRNS,KC_HASH,KC_DLR, KC_LPRN,KC_RPRN,KC_GRV,
 			 KC_TRNS,KC_PERC,KC_CIRC,KC_LBRC,KC_RBRC,KC_TILD,KC_TRNS,
 			 KC_TRNS,KC_TRNS, KC_TRNS,KC_TRNS,KC_TRNS,
-																			 RGB_MOD,KC_TRNS,
-																							 KC_TRNS,
-															 RGB_VAD,RGB_VAI,KC_TRNS,
+																	RGB_MOD, KC_TRNS,
+																			 KC_TRNS,
+															RGB_VAD,RGB_VAI, KC_TRNS,
 			 // right hand
 			 KC_TRNS, KC_F6,   KC_F7,  KC_F8,   KC_F9,   KC_F10,  KC_F11,
 			 KC_TRNS, KC_UP,   KC_7,   KC_8,    KC_9,    KC_ASTR, KC_F12,
@@ -121,7 +123,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *                                 `--------------------'       `--------------------'
  */
 // MEDIA AND MOUSE
-LAYOUT_ergodox(
+[MDIA] = LAYOUT_ergodox(
 			 RESET, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
 			 KC_TRNS, KC_TRNS, KC_TRNS, KC_MS_U, KC_TRNS, KC_TRNS, KC_TRNS,
 			 KC_TRNS, KC_TRNS, KC_MS_L, KC_MS_D, KC_MS_R, KC_TRNS,
@@ -187,19 +189,15 @@ const uint16_t PROGMEM fn_actions[] = {
 		[1] = ACTION_LAYER_TAP_TOGGLE(SYMB)                // FN1 - Momentary Layer 1 (Symbols)
 };
 
-const macro_t *action_get_macro(keyrecord_t *record, uint8_t id, uint8_t opt)
-{
-	// MACRODOWN only works in this function
-			switch(id) {
-				case 0:
-				if (record->event.pressed) {
-					register_code(KC_RSFT);
-				} else {
-					unregister_code(KC_RSFT);
-				}
-				break;
-			}
-		return MACRO_NONE;
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+	if (record->event.pressed) {
+		switch(keycode) {
+			case GGWP:
+				SEND_STRING("GGWP");
+				return false; break;
+		}
+	}
+	return true;
 };
 
 // Runs just one time when the keyboard initializes.
